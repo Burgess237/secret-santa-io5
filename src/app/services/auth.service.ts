@@ -1,71 +1,96 @@
 import { Injectable, NgZone } from '@angular/core';
-import { User } from './user';
+import { Users } from '../models/users';
 import { Router } from '@angular/router';
-import { Platform, ToastController } from '@ionic/angular';
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-import { auth } from 'firebase/app';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AppComponent } from '../app.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { GoogleAuthProvider } from '@firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
 
-  userData: User;
+export class AuthService {
+  userData: any;
 
   constructor(
-    public ngFireAuth: FirebaseAuthentication,
     public afStore: AngularFirestore,
+    public ngFireAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone,
-    public platform: Platform,
-    public googlePlus: GooglePlus,
-    public firebaseLogin: AngularFireAuth,
-    public toast: ToastController
-	){    // try login from localstore?
-      this.firebaseLogin.auth.onAuthStateChanged(user => {
-        if (user) {
-          this.userData = user;
-          localStorage.setItem('user', JSON.stringify(this.userData));
-          JSON.parse(localStorage.getItem('user'));
-        } else {
-          localStorage.setItem('user', null);
-          JSON.parse(localStorage.getItem('user'));
-        }
-      });
-
-    // Check if user has already logged in
-
+    public ngZone: NgZone
+  ) {
+    this.ngFireAuth.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    });
   }
 
   signIn(email, password) {
     return this.ngFireAuth.signInWithEmailAndPassword(email,password);
   }
 
+  // Register user with email/password
   registerUser(email, password) {
-    if(this.platform.is('cordova')) {
-      return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
-    } else {
-      return this.firebaseLogin.auth.createUserWithEmailAndPassword(email,password);
-    }
+    return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
   }
 
-  sendVerificationEmail() {
-    return this.ngFireAuth.sendEmailVerification()
-      .then(() => {
-        this.router.navigate(['verify-email']);
-      });
+  sendVerificationMail() {
+    return this.ngFireAuth.currentUser.then(u => u.sendEmailVerification())
+    .then(() => {
+      this.router.navigate(['verify-email']);
+    });
   }
 
-  passwordRecover(passwordResetEmail) {
+   // Recover password
+   passwordRecover(passwordResetEmail) {
     return this.ngFireAuth.sendPasswordResetEmail(passwordResetEmail)
     .then(() => {
       window.alert('Password reset email has been sent, please check your inbox.');
     }).catch((error) => {
       window.alert(error);
+    });
+  }
+
+  googleAuth() {
+    return this.authLogin(new GoogleAuthProvider());
+  }
+
+  authLogin(provider) {
+    return this.ngFireAuth.signInWithPopup(provider)
+    .then((result) => {
+       this.ngZone.run(() => {
+          this.router.navigate(['dashboard']);
+        });
+      this.setUserData(result.user);
+    }).catch((error) => {
+      window.alert(error);
+    });
+  }
+
+  setUserData(user) {
+    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
+    const userData: Users = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified
+    };
+    return userRef.set(userData, {
+      merge: true
+    });
+  }
+
+  // Sign-out
+  signOut() {
+    return this.ngFireAuth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['login']);
     });
   }
 
@@ -81,85 +106,4 @@ export class AuthService {
     return (user.emailVerified !== false) ? true : false;
   }
 
-  // Sign in with Gmail
-  googleAuth() {
-      return this.authLogin();
-  }
-
-  // Auth providers
-  authLogin() {
-    if(this.platform.is('cordova')) {
-      return this.googlePlus.login({
-        webClientID: '277060750108-ogquhi1bn51raslqtbpe1mrmqo00h5dv.apps.googleusercontent.com',
-        offline: true,
-      }).then( res => {
-        //this.showToast('Google login sucess');
-          this.ngFireAuth.signInWithGoogle(res.idToken, res.accessToken)
-          .then(() => {
-            //this.showToast('Sign in with google');
-
-            this.ngFireAuth.onAuthStateChanged().subscribe(user => {
-              if (user) {
-                this.userData = user;
-                localStorage.setItem('user', JSON.stringify(this.userData));
-                JSON.parse(localStorage.getItem('user'));
-                this.ngZone.run(() => {
-                  //this.showToast('Home navigate');
-                  this.router.navigate(['home']);
-                });
-                this.setUserData(user);
-              } else {
-                localStorage.setItem('user', null);
-                JSON.parse(localStorage.getItem('user'));
-              }
-            });
-          });
-        }
-      );
-    } else {
-      return this.firebaseLogin.auth.signInWithPopup(new auth.GoogleAuthProvider())
-      .then((result) => {
-         this.ngZone.run(() => {
-            this.router.navigate(['home']);
-          });
-        this.setUserData(result.user);
-      }).catch((error) => {
-        window.alert(error);
-      });
-    }
-
-  }
-
-  // Store user in localStorage
-  setUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
-    };
-    return userRef.set(userData, {
-      merge: true
-    });
-  }
-
-  // Sign-out
-  signOut() {
-    if(this.platform.is('cordova')) {
-      // do cordova things
-      return this.googlePlus.logout().then((res) => {
-        console.log(res);
-        this.ngFireAuth.signOut();
-        localStorage.removeItem('user');
-        this.router.navigate(['login']);
-      });
-    } else {
-        return this.firebaseLogin.auth.signOut().then(() => {
-          localStorage.removeItem('user');
-          this.router.navigate(['login']);
-        });
-      }
-    }
-  }
+}
