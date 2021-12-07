@@ -1,44 +1,49 @@
 <ion-app>
-  <ion-split-pane contentId="main-content" [when]="false" >
+  <ion-split-pane contentId="main-content" [when]="false" *ngIf="false">
     <ion-menu contentId="main-content" type="overlay" type="push" menuID="main-menu">
       <ion-header translucent="true">
         <ion-toolbar color="primary">
           <ion-title>Menu</ion-title>
-          
+
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        
-          <ion-item menu-close routerLink="/account" routerLinkActive="router-link-active" >
-            <ion-avatar slot="start">
-              <img src="{{null }}" />
-            </ion-avatar>
-            <ion-label>Your Name</ion-label>
-          </ion-item>
-            <ion-item menu-close routerLink="/home" routerLinkActive="router-link-active">
-              <ion-icon slot="start" name="home-outline"></ion-icon>
-              <ion-label>Home</ion-label>
-            </ion-item>
-            <ion-item menu-close routerLink="/completed-tasks" routerLinkActive="router-link-active">
-              <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
-              <ion-label>Completed Tasks</ion-label>
-            </ion-item>
-            <ion-item menu-close routerLink="/archive" routerLinkActive="router-link-active">
-              <ion-icon slot="start" name="trash-bin-outline"></ion-icon>
-              <ion-label>Archive</ion-label>
-            </ion-item>
-            <ion-item menu-close routerLink="/map" routerLinkActive="router-link-active">
-              <ion-icon slot="start"  name="map-outline"></ion-icon>
-              <ion-label>Map</ion-label>
-          </ion-item>
+
+        <ion-item menu-close routerLink="/account" routerLinkActive="router-link-active"> -->
+          <!-- Subscribe to authlogin updates -->
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+          </ion-avatar>
+          <ion-label>Your Name</ion-label>
+        </ion-item>
+        <ion-item menu-close routerLink="/home" routerLinkActive="router-link-active">
+          <ion-icon slot="start" name="home-outline"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+        <ion-item menu-close routerLink="/completed-tasks" routerLinkActive="router-link-active">
+          <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+          <ion-label>Completed Tasks</ion-label>
+        </ion-item>
+        <ion-item menu-close routerLink="/archive" routerLinkActive="router-link-active">
+          <ion-icon slot="start" name="trash-bin-outline"></ion-icon>
+          <ion-label>Archive</ion-label>
+        </ion-item>
+        <ion-item menu-close routerLink="/map" routerLinkActive="router-link-active">
+          <ion-icon slot="start" name="map-outline"></ion-icon>
+          <ion-label>Map</ion-label>
+        </ion-item>
       </ion-content>
       <ion-footer class="bar-stable">
         <ion-item>
           <ion-icon slot="start" name="log-out-outline" (click)="logOut()"></ion-icon>
-        <ion-label>Log Out</ion-label>
+          <ion-label>Log Out</ion-label>
         </ion-item>
-    </ion-footer>
+      </ion-footer>
     </ion-menu>
+
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
+
+
+  <ion-router-outlet></ion-router-outlet>
 </ion-app>

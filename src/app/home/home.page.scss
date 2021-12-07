@@ -1,0 +1,75 @@
+ion-card > ion-img {
+    object-fit: cover;
+    height: 200px;
+}
+
+
+#introduction > .first-hero-bg {
+    background-image: url("../../assets/images/mel-poole-ChRIiQZ9h1M-unsplash.jpg");
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60rem;
+    padding-bottom: 10.5rem;
+    .stuff-inside-1 {
+        width: 50rem;
+        padding: 7rem 1rem 1rem 7rem;
+    }
+}
+
+#icon-section {
+    background-color: #fff;
+    border-top-left-radius: 10rem 13.4rem;
+    margin-top: -13.4rem;
+    padding-bottom: 25rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 10.5rem;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    
+}
+
+#icon-section::before {
+    background: radial-gradient(circle at 0 -10%,hsla(0,0%,100%,0) 71%,#fff 72%);
+    content: "";
+    display: block;
+    height: 9.3rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    width: 10rem;
+    z-index: 2;
+    }
+
+#card-container {
+        background-color:var(--ion-color-medium);
+        border-top-left-radius: 10rem 13.4rem;
+        margin-top: -13.4rem;
+        padding-bottom: 12rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: 10.5rem;
+        position: relative;
+        text-align: center;
+        z-index: 2;
+    }
+
+    #card-container::before {
+     
+            background: radial-gradient(circle at 0 -10%,hsla(0,0%,100%,0) 71%,#fff 72%);
+        content: "";
+        display: block;
+        height: 9.3rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        width: 10rem;
+        z-index: 2;
+        
+    }

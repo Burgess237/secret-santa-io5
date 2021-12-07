@@ -10,9 +10,12 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SmallLoginComponent } from './small-login/small-login.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SmallLoginComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -21,9 +24,9 @@ import { AppRoutingModule } from './app-routing.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

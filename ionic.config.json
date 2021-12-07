@@ -1,7 +1,7 @@
 {
   "name": "secret-santa-io5",
   "integrations": {
-    "capacitor": {}
+    "cordova": {}
   },
   "type": "angular"
 }

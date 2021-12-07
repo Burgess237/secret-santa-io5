@@ -1,22 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Platform } from '@ionic/angular';
+import { ScreensizeService } from './services/screensize.service';
+import { Title } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  pageTitle: string;
+  isDesktop: boolean;
+
+  constructor(
+    public authService: AuthService,
+    public titleService: Title,
+  ) {
+    this.initializeApp();
+    this.titleService.setTitle('Mixr App');
+  }
 
   logOut() {
 
   }
+
+
+  initializeApp() {
+
+  }
+
+
 }

@@ -1,5 +1,5 @@
 export interface Exchange {
-    id: number;
+    id: string;
     associatedUsers: AssociatedUsers[];
 }
 

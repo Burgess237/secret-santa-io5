@@ -1,14 +1,87 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-      
-    </ion-buttons>
-    
-    <ion-title>Home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding fullscreen>
+  <app-header></app-header>
 
-<ion-content>
+  <section id="introduction">
+    <div class="first-hero-bg">
+      <div class="stuff-inside-1">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+            <ion-card-title>Awesome Title</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Awesome content
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </section>
 
+  <section id="icon-section">
+    <div class="content-width context-width">
+      <h2>The Best way to do anything</h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+                <ion-card-title>Awesome Title</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Awesome content
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+                <ion-card-title>Awesome Title</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Awesome content
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+                <ion-card-title>Awesome Title</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Awesome content
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </section>
+
+  <section id="card-container">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4" *ngFor="let exchange of exchanges">
+          <ion-card>
+            <ion-img src="{{exchange.image}}"></ion-img>
+            <ion-card-header>
+              <ion-card-title>
+                {{exchange.name}}
+              </ion-card-title>
+
+            </ion-card-header>
+
+            <ion-button>view details</ion-button>
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+
+
+  <app-footer></app-footer>
 </ion-content>

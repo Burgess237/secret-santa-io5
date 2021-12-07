@@ -35,20 +35,7 @@
     }
 }
 
-ion-content::part(background) {
-    height: 100%;
-    background-image: url("../../../assets/images/bg-01.png");
-}
 
-ion-grid::part(background) {
-    background: transparent;
-}
-
-ion-row::part(background) {
-    height: 100%;
-    background: transparent;
-
-}
 
 ion-grid{
     height: 100%;
@@ -60,18 +47,6 @@ ion-col {
     margin: auto;
 }
 
-form {
-    background-color: #1e1e1e;
-    padding: 15px;
-}
-
-.jimbu-logo {
-    width: 200px;
-    /* height: 59.5px; */
-    margin: auto;
-    display: block;
-    margin-bottom: 20px;
-}
 
 @media screen and (min-width: 500px) {
     ion-grid {

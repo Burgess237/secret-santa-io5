@@ -1,0 +1,25 @@
+.left-flex-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: flex-start;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    z-index: 99;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.right-flex-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: flex-end;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    z-index: 99;
+    align-content: flex-end;
+    justify-content: space-evenly;
+    flex-direction: column;
+}

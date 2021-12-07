@@ -24,3 +24,21 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    display: block !important;
+  }
+
+  .context-width {
+    max-width: 1200px;
+    padding: 15px;
+    margin: auto;
+  }
+
+  .center-text {
+    text-align: center;
+  }
+
+  
