@@ -33,7 +33,7 @@
       <ion-buttons slot="end">
         <ion-button routerLink="/home" routerLinkActive="router-link-active">Home</ion-button>
         <ion-button routerLink="/account" routerLinkActive="router-link-active">Account</ion-button>
-        <ion-button (click)="loginModal()">Login</ion-button>
+        <ion-button (click)="loginModal()" *ngIf="!authService.isLoggedIn">Login</ion-button>
       </ion-buttons>
 
 

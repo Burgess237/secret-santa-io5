@@ -10,7 +10,7 @@ import { GoogleAuthProvider } from '@firebase/auth';
 })
 
 export class AuthService {
-  userData: any;
+  userData: Users;
 
   constructor(
     public afStore: AngularFirestore,
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   signIn(email, password) {
-    return this.ngFireAuth.signInWithEmailAndPassword(email,password);
+    return this.ngFireAuth.signInWithEmailAndPassword(email, password);
   }
 
   // Register user with email/password
@@ -41,19 +41,19 @@ export class AuthService {
 
   sendVerificationMail() {
     return this.ngFireAuth.currentUser.then(u => u.sendEmailVerification())
-    .then(() => {
-      this.router.navigate(['verify-email']);
-    });
+      .then(() => {
+        this.router.navigate(['verify-email']);
+      });
   }
 
-   // Recover password
-   passwordRecover(passwordResetEmail) {
+  // Recover password
+  passwordRecover(passwordResetEmail) {
     return this.ngFireAuth.sendPasswordResetEmail(passwordResetEmail)
-    .then(() => {
-      window.alert('Password reset email has been sent, please check your inbox.');
-    }).catch((error) => {
-      window.alert(error);
-    });
+      .then(() => {
+        window.alert('Password reset email has been sent, please check your inbox.');
+      }).catch((error) => {
+        window.alert(error);
+      });
   }
 
   googleAuth() {
@@ -62,14 +62,14 @@ export class AuthService {
 
   authLogin(provider) {
     return this.ngFireAuth.signInWithPopup(provider)
-    .then((result) => {
-       this.ngZone.run(() => {
+      .then((result) => {
+        this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
-      this.setUserData(result.user);
-    }).catch((error) => {
-      window.alert(error);
-    });
+        this.setUserData(result.user);
+      }).catch((error) => {
+        window.alert(error);
+      });
   }
 
   setUserData(user) {
