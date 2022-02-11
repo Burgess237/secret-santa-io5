@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { LoginPage } from '../account/login/login.page';
+import { AuthService } from '../services/auth.service';
 import { SmallLoginComponent } from '../small-login/small-login.component';
 
 @Component({
@@ -33,9 +34,10 @@ export class HomePage implements OnInit {
     }
   ];
 
-  constructor(private popoverController: PopoverController) { }
+  constructor(private popoverController: PopoverController, public authService: AuthService) { }
 
   ngOnInit() {
+
   }
 
   async loginPopover(ev: any) {
@@ -50,6 +52,10 @@ export class HomePage implements OnInit {
 
   getExchanges() {
 
+  }
+
+  addBirthday() {
+    console.log('clicked');
   }
 
 }

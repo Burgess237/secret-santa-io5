@@ -9,7 +9,7 @@ ion-card > ion-img {
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 25rem;
+    height: 60rem;
     padding-bottom: 10.5rem;
     .stuff-inside-1 {
         width: 50rem;
@@ -24,7 +24,7 @@ ion-card > ion-img {
     padding-bottom: 25rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    padding-top: 0.5rem;
+    padding-top: 10.5rem;
     position: relative;
     text-align: center;
     z-index: 2;
@@ -87,34 +87,4 @@ ion-card > ion-img {
         align-content: center;
         justify-content: center;
         align-items: center;
-    }
-
-    .icon-circled {
-        border-radius: 50%;
-        padding: 5px;
-        background-color: var(--ion-color-light);
-        margin-right: 15px;
-    }
-
-    .light {
-        background-color: var(--ion-color-light);
-        padding: 25px;
-        border-radius: 35px;
-
-    }
-
-    .linkHolder {
-        padding-bottom: 15px;
-    }
-
-    .centered {
-        padding-bottom: 25px;
-    }
-
-    .profile-image {
-        margin-top: -50px;
-       img {
-        border-radius: 100%;
-        border: 2px solid white;
-       }
     }
