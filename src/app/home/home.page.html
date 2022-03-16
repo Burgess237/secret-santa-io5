@@ -9,10 +9,10 @@
 
   <section id="icon-section">
     <div class="profile-image">
-      <img src="{{ authService.userData.photoURL }}" alt="{{ authService.userData.displayName }}" height="172"
+      <img src="{{ authService?.userData?.photoURL }}" alt="{{ authService?.userData?.displayName }}" height="172"
         width="172" />
     </div>
-    <h1>My Dashboard</h1>
+    <h1>{{authService?.userData?.displayName}}'s Dashboard</h1>
     <div class="linkHolder"><a href="#"><span>view my profile</span></a></div>
     <div class="centered">
       <ion-button size="large" shape="pill">add to wishlist</ion-button>
@@ -52,7 +52,7 @@
     <div class="exchange-container">
       <ion-grid fixed>
         <ion-row>
-          <ion-col size="4" *ngFor="let exchange of exchanges">
+          <ion-col size="12" size-sm="4" *ngFor="let exchange of exchanges">
             <ion-card>
               <ion-img src="{{exchange.image}}"></ion-img>
               <ion-card-header>
@@ -64,6 +64,14 @@
 
               <ion-button>view details</ion-button>
 
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-sm="4" class="ion-justify-content-center h-100">
+            <ion-card class="ion-justify-content-center h-100">
+              <ion-icon size="large" name="add-outline" style="
+              margin: auto;
+              height: 100%;
+          "></ion-icon>
             </ion-card>
           </ion-col>
         </ion-row>
